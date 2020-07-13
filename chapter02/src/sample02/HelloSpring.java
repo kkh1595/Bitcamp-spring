@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class HelloSpring {
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		Calc calc;
 		calc = (Calc)context.getBean("calcAdd"); 
 		calc.calculate();

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!--sample01  -->
+	<bean id="messageBeanImpl" class="sample01.MessageBeanImpl">
+		<constructor-arg type="String" value="자두"/>
+		<property name="cost">
+			<value>1000</value>
+		</property>
+		<property name="qty">
+			<value>2</value>
+		</property>
+	</bean>
+	<!-- sample02 -->
+	<bean id="calcAdd" class="sample02.CalcAdd">
+		<constructor-arg value="10"/>
+		<constructor-arg>
+			<value>10</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="calcMul" class="sample02.CalcMul">
+		<property name="x" value="25"/>
+		<property name="y" value="11"/>
+	</bean>
+	<!-- sample03 -->
+	<bean id="sungJukImpl" class="sample03.SungJukImpl">
+		<constructor-arg ref="sungJukDTO"></constructor-arg>
+	</bean>
+	
+	<bean id="sungJukDTO" class="sample03.SungJukDTO">
+	<property name="name" value="홍길동"/>
+	<property name="kor" value="70"/>
+	<property name="eng" value="80"/>
+	<property name="math" value="100"/>
+	</bean>
+	<!--sample04 -->
+	<bean id="messageBeanImpl2" class="sample04.MessageBeanImpl" p:phone="010-123-123">
+		<constructor-arg type="String" value="고고공"/>
+		<property name="outputter" ref="fileOutputter"></property>
+	</bean>
+	
+	<bean id="fileOutputter" class="sample04.FileOutputter">
+		<property name="filePath" value="D:/"/>
+		<property name="fileName" value="result.txt"/>
+	</bean>
+	
+	
+	<!--sample05 -->
+	<bean id="sungJukDTO2" class="sample05.SungJukDTO2" scope="prototype"></bean>
+	<!--dto는 새로운 값을 계속 받아야되기때문에 싱글톤이 되면 안됨 , prototype을 이용해 싱글톤을 깨버리자-->
+	<bean id="list" class="java.util.ArrayList"></bean>
+	<!--main-->
+	<bean id="helloSpring" class="sample05.HelloSpring"></bean>
+	<!--input-->
+	<bean id="sungJukInput" class="sample05.SungJukInput" scope="prototype">
+		<property name="sungJukDTO2" ref="sungJukDTO2"/> <!--위 설정한 dto를 참조-->
+		<property name="list" ref="list"/>
+	</bean>
+	<!--output-->
+	<bean id="sungJukOutput" class="sample05.SungJukOutput" >
+		<property name="list" ref="list"/>
+	</bean>
+	<!--modify -->
+	<bean id="sungJukModify" class="sample05.SungJukModify">
+		<property name="list" ref="list"/>
+	</bean>
+	<!--delete  -->
+	<bean id="sungJukDelete" class="sample05.SungJukDelete">
+		<property name="list" ref="list"/>
+	</bean>
+	
+</beans>

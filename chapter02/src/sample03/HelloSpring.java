@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class HelloSpring {
 
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		SungJuk sj;
 		sj = (SungJuk)context.getBean("sungJukImpl");
 		sj.calcTot();

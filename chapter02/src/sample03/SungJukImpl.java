@@ -2,13 +2,19 @@ package sample03;
 
 import java.util.Scanner;
 
+import lombok.AllArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public class SungJukImpl implements SungJuk {
-	private SungJukDTO sungJukDTO;
+	@NonNull private SungJukDTO sungJukDTO;
 	
 	
-	public SungJukImpl(SungJukDTO sungJukDTO) {
-		this.sungJukDTO = sungJukDTO;
-	}
+//	public SungJukImpl(SungJukDTO sungJukDTO) {
+//		this.sungJukDTO = sungJukDTO;
+//	}
+	
 	@Override
 	public void calcTot() {
 		sungJukDTO.setTot(sungJukDTO.getKor()
