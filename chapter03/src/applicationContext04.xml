@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!--핵심사항 -->
+	<bean id="messageBeanImpl" class="sample04_Advisor.MessageBeanImpl"></bean>
+	
+	<!--원하는 메소드에 advice를 줄 수 있는 pointcut 생성  -->
+	<bean id="methodPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+		<property name="mappedNames" value="study,lesson"></property>
+	</bean>
+	
+	<!--advice (공통사항)-->
+	<bean id="loggingBeforeAdvice" class="sample04_Advisor.LoggingBeforeAdvice"></bean>
+	<bean id="loggingAfterAdvice" class="sample04_Advisor.LoggingAfterAdvice"></bean>
+	<bean id="loggingAroundAdvice" class="sample04_Advisor.LoggingAroundAdvice"></bean>
+	
+	<!--Advisor(advice + pointcut) -->
+	<bean id="beforeAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="loggingBeforeAdvice"/>
+		<property name="pointcut" ref="methodPointcut"/>
+	</bean>
+	<bean id="afterAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor"> 
+																 <!--메소드와  포인트컷 한번에 작성하기  -->
+		<property name="advice" ref="loggingAfterAdvice"/>
+		<property name="mappedNames">
+			<list>
+				<value>study</value>
+				<value>lesson</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!--대리인 proxy  -->
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="messageBeanImpl"/>
+		<property name="interceptorNames">
+		 <list>
+		 	<value>beforeAdvisor</value>
+		 	<value>afterAdvisor</value>
+		 </list>
+		</property>
+	</bean>
+</beans>
+
