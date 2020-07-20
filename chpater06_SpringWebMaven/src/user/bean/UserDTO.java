@@ -1,5 +1,8 @@
 package user.bean;
 
-public class UserDTO {
+import lombok.Data;
 
+@Data
+public class UserDTO {
+	private String name, id, pwd;
 }

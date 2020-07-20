@@ -3,7 +3,7 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="chpater06_SpringWebMaven"/>
         <property name="java-output-path" value="/chpater06_SpringWebMaven/build/classes"/>
+        <property name="context-root" value="chapter06_SpringWebMaven"/>
     </wb-module>
 </project-modules>

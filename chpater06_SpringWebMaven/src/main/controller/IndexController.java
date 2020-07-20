@@ -9,8 +9,4 @@ public class IndexController {
 	public String index() {
 		return "/main/index.jsp";
 	}
-	@RequestMapping(value="/index/input/")
-	public String input() {
-		return "/service/input.jsp";
-	}
 }
