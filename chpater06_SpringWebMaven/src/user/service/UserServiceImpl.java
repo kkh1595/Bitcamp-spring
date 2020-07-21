@@ -1,5 +1,9 @@
 package user.service;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +32,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void delete(String id) {
 		userDAO.delete(id);
+	}
+
+	@Override
+	public List<UserDTO> getUserList() {
+		List<UserDTO> list = userDAO.getUserLiSt();
+		return list;
+	}
+
+	@Override
+	public void modify(UserDTO userDTO) {
+		Map<String,String> map = new HashedMap<String, String>();
+		System.out.println(userDTO.getId());
+		map.put("id",userDTO.getId());
+		map.put("name",userDTO.getName());
+		map.put("pwd",userDTO.getPwd());
+		userDAO.modify(map);
 	}
 }
