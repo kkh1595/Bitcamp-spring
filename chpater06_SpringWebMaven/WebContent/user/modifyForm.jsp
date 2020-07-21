@@ -19,11 +19,11 @@
 			</tr>
 			<tr>
 				<td>아이디</td>
-				<td><input type=text name="id" id="id"></td>
+				<td><input type=text name="id" id="id" readonly></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type=text name="pwd" id="pwd"></td>
+				<td><input type=password name="pwd" id="pwd"></td>
 			</tr>
 			<tr>
 				<td><input type="button" id="modifyBtn" value="수정"></td>
@@ -37,17 +37,24 @@
 		$('#modifyFormDiv').css('display','none');
 		$('#searchBtn').click(function() {
 			$('#resultDiv').empty();
+			$('#id').val('');
+			$('#name').val('');
+			$('#pwd').val('');
 			$.ajax({
 				type:'post',
-				url:'/chapter06_SpringWebMaven/user/checkId',
-				data: 'id='+$('#searchId').val(),
-				dataType: 'text',
+				url:'/chapter06_SpringWebMaven/user/getUser',
+				data: {'id':$('#searchId').val()},
+				dataType: 'json',
 				success: function(data){
-					if(data=='사용 가능'){
+					if($('#searchId').val()==''){
 						$('#resultDiv').text('먼저 아이디를 입력해주세요').css('color','red');
+					}else if(data.userDTO==null){
+						$('#resultDiv').text('없는 아이디입니다').css('color','red');
+						$('#modifyFormDiv').css('display','none');
 					}else{
 						$('#modifyFormDiv').css('display','block').css('font-size','10pt');
-						
+						$('#id').val(data.userDTO.id);
+						$('#name').val(data.userDTO.name);
 						$('#modifyBtn').click(function(){
 							$.ajax({
 								type:'post',

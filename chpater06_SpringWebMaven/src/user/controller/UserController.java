@@ -97,6 +97,16 @@ public class UserController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/user/getUser",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getUser(@RequestParam String id, ModelAndView mav) {
+		UserDTO userDTO = userService.getUser(id);
+	//	ModelAndView mav = new ModelAndView();
+		mav.addObject("userDTO", userDTO);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
 	@RequestMapping(value="/user/modify",method=RequestMethod.POST)
 	@ResponseBody
 	public void modify(@ModelAttribute UserDTO userDTO) {

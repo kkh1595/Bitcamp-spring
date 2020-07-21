@@ -49,4 +49,11 @@ public class UserServiceImpl implements UserService {
 		map.put("pwd",userDTO.getPwd());
 		userDAO.modify(map);
 	}
+
+	@Override
+	public UserDTO getUser(String id) {
+		UserDTO dto = userDAO.getUser(id);
+		return dto;
+	}
+	
 }

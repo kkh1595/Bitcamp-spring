@@ -10,4 +10,5 @@ public interface UserService {
 	public void delete(String id);
 	public List<UserDTO> getUserList();
 	public void modify(UserDTO userDTO);
+	public UserDTO getUser(String id);
 }

@@ -42,6 +42,12 @@ public class UserDAOMybatis implements UserDAO {
 	public void modify(Map<String,String> map) {
 		sqlSession.update("userSQL.modify",map);
 	}
+
+	@Override
+	public UserDTO getUser(String id) {
+		UserDTO dto = sqlSession.selectOne("userSQL.getUser",id);
+		return dto;
+	}
 		
 
 
