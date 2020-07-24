@@ -21,7 +21,7 @@
 <c:if test="${memId ne null }">
 <td height=400 width=180 valign=top><jsp:include page="../member/loginOk.jsp"/></td>
 </c:if>
-<td valign=top><jsp:include page="${display }"/></td>
+<td valign=top><jsp:include page="${display}"/></td>
 </tr>
 <tr>
 <td colspan=2><jsp:include page="../template/bottom.jsp"/></td>

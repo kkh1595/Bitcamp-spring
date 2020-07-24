@@ -23,7 +23,7 @@
 		</tr>
 		<tr>
 			<td align=center colspan=2><input type=button value=로그인 id="loginBtn">
-			 <input type=button value=회원가입 id="signUpBtn"></td>
+			 <input type=button value=회원가입 onclick="location.href='/springProject/member/writeForm'"></td>
 		</tr>
 	</table>
 	<div align=center id="loginCheck"></div>	
@@ -64,5 +64,9 @@ $('#loginBtn').click(function(){
 		});
 	}
 });
+
+
+
+
 </script>
 </html>

@@ -9,14 +9,14 @@
 <head>
 <meta charset="UTF-8">
 <title>주소검색</title>
-<link rel="stylesheet" href="../css/member.css">
+<!-- <link rel="stylesheet" href="../css/member.css"> -->
 </head>
 <body>
-<form method="post" action="/miniProject/member/checkPost.do">
+<form method="post" action="" id="checkPost">
 <table border=2 cellspacing=0 cellpadding=3 width=100%>
 <tr align=center>
 <th>시도</th>
-<td><select name=sido style=width:100px>
+<td><select id="sido" name=sido style=width:100px>
 <option value="">직접입력</option>
 <option value="서울">서울</option>
 <option value="인천">인천</option> 
@@ -37,11 +37,11 @@
 <option value="제주">제주</option>
 </select></td>
 <th>시.군.구</th>
-<td><input type=text name=sigungu style=width:200px></td>
+<td><input type=text name=sigungu id="sigungu" style=width:200px></td>
 </tr>
 <tr>
 <th>도로명</th>
-<td colspan=3><input type=text name=roadname> <input type=submit value=검색></td>
+<td colspan=3><input type=text name=roadname id="roadname"> <input type=button id="searchAddr"value=검색></td>
 </tr>
 <tr>
 <th>우편번호</th>
@@ -64,6 +64,28 @@ ${zipcodeDTO.sido
 </c:if>
 </table>
 </form>
-<script type="text/javascript" src="../js/member.js?ver=2"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#searchAddr').click(function(){
+		$.ajax({
+			type:'post',
+			url:'/springProject/member/addrList',
+			data:$('#checkPost').serialize(),
+			success:function(data){
+			},
+			error:function(){
+				alert('error');
+			}
+		});
+	});
+});
+function checkPostClose(zipcode,address){
+	opener.document.forms[0].zipcode.value=zipcode;
+	opener.document.forms[0].addr1.value=address;
+	window.close()
+	opener.document.forms[0].addr2.focus()
+}
+</script>
 </body>
 </html>

@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -15,6 +16,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 public class SpringConfiguration {
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
+	@Autowired
+	private ApplicationContext applicationContext;
 	
 	@Bean
 	public BasicDataSource dataSource() {
@@ -28,14 +31,15 @@ public class SpringConfiguration {
 		return basicDataSource;
 	}
 	@Bean
-	public SqlSessionFactoryBean sqlSessionFactory(){
+	public SqlSessionFactoryBean sqlSessionFactory () throws Exception{
 		//방법 두가지
 		PathMatchingResourcePatternResolver resource = new PathMatchingResourcePatternResolver();
 		ClassPathResource mapper = new ClassPathResource("member/dao/memberMapper.xml");
-		
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		
 		sqlSessionFactoryBean.setConfigLocation(resource.getResource("spring/mybatis-config.xml"));
 		sqlSessionFactoryBean.setMapperLocations(mapper);
+		//sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:*/dao/*Mapper.xml"));
 		sqlSessionFactoryBean.setDataSource(dataSource());
 		return sqlSessionFactoryBean;
 	}
